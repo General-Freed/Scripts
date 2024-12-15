@@ -15,7 +15,7 @@ $devices = @("Enumerator für virtuelle NDIS-Netzwerkadapter","Microsoft virtuel
 
 foreach($d in $devices) {
 
-    Get-PnpDevice | ? Friendly name -eq $d | Disable-PnpDevice
+    Get-PnpDevice | ? Friendly name -eq $d | Disable-PnpDevice -Confirm:$false
 
 }
 
