@@ -9,13 +9,13 @@ foreach($s in $services) {
 
 #Auto: DiagTrack, Spooler, SysMain
 
-write-host "Ger‰te deaktivieren"
+write-host "Ger√§te deaktivieren"
 
-$devices = @("Enumerator f¸r virtuelle NDIS-Netzwerkadapter","Microsoft virtueller Datentr‰gerenumerator","Hochpr‰zisionsereigniszeitgeber","Redirector-Bus f¸r Remotedesktop-Ger‰t")
+$devices = @("Enumerator f√ºr virtuelle NDIS-Netzwerkadapter","Microsoft virtueller Datentr√§gerenumerator","Hochpr√§zisionsereigniszeitgeber","Redirector-Bus f√ºr Remotedesktop-Ger√§t")
 
 foreach($d in $devices) {
 
-    Get-PnpDevice $d | Disable-PnpDevice
+    Get-PnpDevice | ? Friendly name -eq $d | Disable-PnpDevice
 
 }
 
