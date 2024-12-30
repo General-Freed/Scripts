@@ -1,4 +1,4 @@
-write-host "Dienste stoppen"
+write-host "Disable Services"
 
 $services = @("BITS","BTAGService","bthserv","lfsvc","DiagTrack","HvHost","vmickvpexchange","vmicguestinterface","vmicshutdown","vmicheartbeat","vmicvmsession","vmicrdv","vmictimesync","vmicvss","PhoneSvc","Spooler","QWAVE","SysMain","WSearch")
 
@@ -9,7 +9,7 @@ foreach($s in $services) {
 
 #Auto: DiagTrack, Spooler, SysMain
 
-write-host "Geräte deaktivieren"
+write-host "Deactivate Devices"
 
 $devices = @("Enumerator für virtuelle NDIS-Netzwerkadapter","Microsoft virtueller Datenträgerenumerator","Hochpräzisionsereigniszeitgeber","Redirector-Bus für Remotedesktop-Gerät")
 
@@ -19,7 +19,7 @@ foreach($d in $devices) {
 
 }
 
-write-host "Reg Keys setzen"
+write-host "Reg Keys"
 
 set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\" -Name "SystemResponsiveness" -Value 0
 
@@ -29,7 +29,7 @@ set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multi
 
 set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\PriorityControl" -Name "Win32PrioritySeparation" -Value 1
 
-Write-Host "Swap Datei 32GB"
+Write-Host "Swap File 32GB"
 
 $pagefile = Get-CimInstance -ClassName Win32_ComputerSystem
 $pagefile.AutomaticManagedPagefile = $false
@@ -39,3 +39,6 @@ $pagefileset = Get-CimInstance -ClassName Win32_PageFileSetting | Where-Object {
 $pagefileset.InitialSize = 32767
 $pagefileset.MaximumSize = 32767
 Set-CimInstance -InputObject $pagefileset
+
+write-host "System Restore activate"
+Enable-ComputerRestore -Drive "C:\"
