@@ -6,10 +6,9 @@ foreach($s in $services) {
 }
 
 write-host "Deactivate Devices"
-#$devices = @("Enumerator für virtuelle NDIS-Netzwerkadapter","Microsoft virtueller Datenträgerenumerator","Hochpräzisionsereigniszeitgeber","Redirector-Bus für Remotedesktop-Gerät")
-$devices = @("ROOT\NDISVIRTUALBUS\0000","ROOT\VDRVROOT\0000","ACPI\PNP0103\2&DABA3FF&0","ROOT\RDPBUS\0000")
+#$devices = @("Enumerator für virtuelle NDIS-Netzwerkadapter","Microsoft virtueller Datenträgerenumerator","Redirector-Bus für Remotedesktop-Gerät")
+$devices = @("ROOT\NDISVIRTUALBUS\0000","ROOT\VDRVROOT\0000","ROOT\RDPBUS\0000","ACPI\PNP0103\*") #,"ACPI\PNP0103\*" <-- "Hochpräzisionsereigniszeitgeber"
 foreach($d in $devices) {
-    #Get-PnpDevice | ? Friendly name -eq $d | Disable-PnpDevice -Confirm:$false
     Get-PnpDevice $d | ft InstanceID,Friendlyname -HideTableHeader
     Get-PnpDevice -InstanceId $d | Disable-PnpDevice -Confirm:$false
 }
