@@ -38,8 +38,8 @@ Set-CimInstance -InputObject $pagefile
 
 Write-Host "Swap File Size 32GB"
 $pagefileset = Get-CimInstance -ClassName Win32_PageFileSetting | Where-Object {$_.name -eq "$ENV:SystemDrive\pagefile.sys"}
-$pagefileset.InitialSize = 32767
-$pagefileset.MaximumSize = 32767
+$pagefileset.InitialSize = 32778    # 32GB + 10MB
+$pagefileset.MaximumSize = 32778
 Set-CimInstance -InputObject $pagefileset
 
 write-host "System Restore activate"
