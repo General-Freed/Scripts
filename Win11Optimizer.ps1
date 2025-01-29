@@ -1,3 +1,9 @@
+#
+#    Optimizes Win11 by disabling unneeded Stuff
+#    Input: None
+#    i.e. Run Script ;-)
+#
+
 write-host "Disable Services"
 $services = @("BITS","BTAGService","bthserv","lfsvc","DiagTrack","HvHost","vmickvpexchange","vmicguestinterface","vmicshutdown","vmicheartbeat","vmicvmsession","vmicrdv","vmictimesync","vmicvss","PhoneSvc","Spooler","QWAVE","SysMain","WSearch")
 foreach($s in $services) {
