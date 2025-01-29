@@ -1,6 +1,12 @@
-﻿cls
-$path = "E:\TempData"
-$destPath = "E:\Duplicates\"
+#
+#    Check Directory for duplicated Files via MD5 Hash
+#    Input: Path to Check
+#    i.e. C:\TooMuchData
+#
+
+cls
+$path = Read-Host "Path to check"
+$destPath = $path + "\Duplicates\"
 
 write-host $path
 
@@ -12,8 +18,6 @@ foreach($x in $list) {
         $smollist = $list | ? hash -eq $x.hash | sort Path -Descending
         #
         for($i=1;$i -lt $smollist.Count; $i++) {
-            #write-host $smollist[$i].Path
-            #Move-Item -Path $smollist[$i].Path -Destination "E:\Duplicates" -ErrorAction Continue
             $sx = $smollist[$i].Path
             $a = $sx.Split(".")
             $newFile = $destPath
@@ -30,6 +34,3 @@ foreach($x in $list) {
         }
     }
 }
-
-#Get-Unique $duplicates
-#$duplicates
