@@ -1,5 +1,10 @@
-﻿cls
-
+#
+#    Compares everything possible in Powershell
+#    Input CMDLet and at least 2 Values to compare
+#     i.e. Get-Mailbox / UserA / UserB;UserC
+#
+  
+cls
 $data = @()
 $seperator = $false
 $func = Read-Host "CMDlet?"
@@ -24,7 +29,6 @@ foreach($prop in $stdobj) {
         for($i=0;$i -lt $cnt;$i++) {
             if($prop.Value -ne $data[$i].PSObject.Properties.Item($prop.Name).Value) {
                 write-host $prop.Name // Standard $prop.Value --> $data[$i].PSObject.Properties.Item("Identity").Value // $data[$i].PSObject.Properties.Item($prop.Name).Value
-                #write-host "---" 
             }            
         }
         if($seperator -eq $true) {
