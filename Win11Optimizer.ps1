@@ -5,7 +5,7 @@
 #
 
 write-host "Disable Services"
-$services = @("BITS","BTAGService","bthserv","lfsvc","DiagTrack","HvHost","vmickvpexchange","vmicguestinterface","vmicshutdown","vmicheartbeat","vmicvmsession","vmicrdv","vmictimesync","vmicvss","PhoneSvc","Spooler","QWAVE","SysMain","WSearch")
+$services = @("BITS","BTAGService","bthserv","lfsvc","DiagTrack","HvHost","vmickvpexchange","vmicguestinterface","vmicshutdown","vmicheartbeat","vmicvmsession","vmicrdv","vmictimesync","vmicvss","PhoneSvc","Spooler","QWAVE","SysMain","WSearch","termService","dmwappushservice","DiagTrack")
 foreach($s in $services) {
     Get-Service $s | FT Displayname,Status -HideTableHeader
     Get-Service $s | Set-Service -StartupType Disabled
