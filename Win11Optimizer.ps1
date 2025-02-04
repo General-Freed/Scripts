@@ -30,6 +30,8 @@ set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\PriorityControl" 
 set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios" -Type DWORD -Name "HypervisorEnforcedCodeIntegrity" -Value 0  #CoreIsolation # --> Default: N/A
 set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\DriverSearching" -Type DWORD -Name "SearchOrderConfig" -Value 0  #DriverSearch -> Default: 1
 set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters" -Type DWORD -Name "EnablePrefetcher" -Value 0  #WinPrefetch # --> Default: 3
+# ?!? P0 State GPU
+set-itemProperty -path "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" -Type DWORD - Name "DisableDynamicPstate" -Value 0
 
 Write-Host "Swap File Manual Size"
 $pagefile = Get-CimInstance -ClassName Win32_ComputerSystem
