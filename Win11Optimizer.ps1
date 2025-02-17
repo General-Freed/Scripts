@@ -11,6 +11,9 @@ foreach($s in $services) {
     Get-Service $s | Set-Service -StartupType Disabled
 }
 
+write-host "Remove Apps"
+Get-AppxPackage -AllUsers Microsoft.XboxGamingOverlay | Remove-AppxPackage
+
 write-host "Deactivate Devices"
 #$devices = @("Enumerator für virtuelle NDIS-Netzwerkadapter","Microsoft virtueller Datenträgerenumerator","Redirector-Bus für Remotedesktop-Gerät")
 $devices = @("ROOT\NDISVIRTUALBUS\0000","ROOT\VDRVROOT\0000","ROOT\RDPBUS\0000","ACPI\PNP0103\*") #,"ACPI\PNP0103\*" <-- "Hochpräzisionsereigniszeitgeber"
