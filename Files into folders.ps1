@@ -12,3 +12,5 @@ if ($f.CreationTime -ge $StartDate -and $f.CreationTime -le $EndDate) {
 $f.movefile($Target)
 }
 }
+
+get-childitem -filter 
