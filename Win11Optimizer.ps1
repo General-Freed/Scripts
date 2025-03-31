@@ -14,6 +14,10 @@ foreach($s in $services) {
 write-host "Remove Apps"
 Get-AppxPackage -AllUsers Microsoft.XboxGamingOverlay | Remove-AppxPackage
 
+write-host "Disable Suggested Notifications"
+#set-itemproperty -Path #HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.ActionCenter.SmartOptOut]
+#"Enabled"=dword:00000000 <<<
+
 write-host "Deactivate Devices"
 #$devices = @("Enumerator für virtuelle NDIS-Netzwerkadapter","Microsoft virtueller Datenträgerenumerator","Redirector-Bus für Remotedesktop-Gerät")
 $devices = @("ROOT\NDISVIRTUALBUS\0000","ROOT\VDRVROOT\0000","ROOT\RDPBUS\0000","ACPI\PNP0103\*") #,"ACPI\PNP0103\*" <-- "Hochpräzisionsereigniszeitgeber"
