@@ -15,8 +15,7 @@ write-host "Remove Apps"
 Get-AppxPackage -AllUsers Microsoft.XboxGamingOverlay | Remove-AppxPackage
 
 write-host "Disable Suggested Notifications"
-#set-itemproperty -Path #HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.ActionCenter.SmartOptOut]
-#"Enabled"=dword:00000000 <<<
+set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.ActionCenter.SmartOptOut\" -Type DWORD -Name "Enabled" -Value 0
 
 write-host "Deactivate Devices"
 #$devices = @("Enumerator für virtuelle NDIS-Netzwerkadapter","Microsoft virtueller Datenträgerenumerator","Redirector-Bus für Remotedesktop-Gerät")
