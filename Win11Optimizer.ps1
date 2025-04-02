@@ -14,8 +14,11 @@ foreach($s in $services) {
 write-host "Remove Apps"
 Get-AppxPackage -AllUsers Microsoft.XboxGamingOverlay | Remove-AppxPackage
 
-write-host "Disable Suggested Notifications"
-set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.ActionCenter.SmartOptOut\" -Type DWORD -Name "Enabled" -Value 0
+write-host "Disable Suggested Notifications -> Needs Verification"
+#set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.ActionCenter.SmartOptOut\" -Type DWORD -Name "Enabled" -Value 0
+
+Write-Host "Enable AutoTray -> Needs Verification"
+#set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\" -Type DWORD -Name "EnableAutoTray" -Value 1
 
 write-host "Deactivate Devices"
 #$devices = @("Enumerator für virtuelle NDIS-Netzwerkadapter","Microsoft virtueller Datenträgerenumerator","Redirector-Bus für Remotedesktop-Gerät")
