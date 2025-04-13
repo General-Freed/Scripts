@@ -20,6 +20,9 @@ write-host "Disable Suggested Notifications -> Needs Verification"
 Write-Host "Enable AutoTray -> Needs Verification"
 #set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\" -Type DWORD -Name "EnableAutoTray" -Value 1
 
+Write-Host "Enable Hibernate"
+set-Itemproperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Power" -Type DWORD Name "HibernateEnabled" -Value 1
+
 write-host "Deactivate Devices"
 #$devices = @("Enumerator für virtuelle NDIS-Netzwerkadapter","Microsoft virtueller Datenträgerenumerator","Redirector-Bus für Remotedesktop-Gerät")
 $devices = @("ROOT\NDISVIRTUALBUS\0000","ROOT\VDRVROOT\0000","ROOT\RDPBUS\0000","ACPI\PNP0103\*") #,"ACPI\PNP0103\*" <-- "Hochpräzisionsereigniszeitgeber"
