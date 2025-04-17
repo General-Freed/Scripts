@@ -45,6 +45,8 @@ set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\M
 # ?!? P0 State GPU
 set-itemProperty -path "HKLM:\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" -Type DWORD -Name "DisableDynamicPstate" -Value 1
 
+set-itemproperty -path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR" -Type DWORD -Name "AppCaptureEnabled" -Value 0
+
 Write-Host "Swap File Manual Size"
 $pagefile = Get-CimInstance -ClassName Win32_ComputerSystem
 $pagefile.AutomaticManagedPagefile = $false
