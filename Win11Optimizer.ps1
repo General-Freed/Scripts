@@ -14,12 +14,12 @@ foreach($s in $services) {
 #write-host "Remove Apps"
 write-host "Remove GameBar and all the Glory that comes with it"
 Get-AppxPackage -AllUsers Microsoft.XboxGamingOverlay | Remove-AppxPackage
-set-ItemProperty -Path "HKCR:\ms-gamebar\" -Type REG_SZ -Name "NoOpenWith" -Value " "
-set-ItemProperty -Path "HKCR:\ms-gamebar\" -Type REG_SZ -Name "URL Protocol" -Value " "
-set-ItemProperty -Path "HKCR:\ms-gamebar\shell\open\command\" -Type REG_SZ -Name "(default)" -Value "$env:SystemRoot\System32\systray.exe"
-set-ItemProperty -Path "HKCR:\ms-ms-gamebarservices\" -Type REG_SZ -Name "NoOpenWith" -Value " "
-set-ItemProperty -Path "HKCR:\ms-ms-gamebarservices\" -Type REG_SZ -Name "URL Protocol" -Value " "
-set-ItemProperty -Path "HKCR:\ms-ms-gamebarservices\shell\open\command\" -Type REG_SZ -Name "(default)" -Value "$env:SystemRoot\System32\systray.exe"
+set-ItemProperty -Path "HKLM:SOFTWARE\Classes\ms-gamebar\" -Type REG_SZ -Name "NoOpenWith" -Value " "
+set-ItemProperty -Path "HKLM:SOFTWARE\Classes\ms-gamebar\" -Type REG_SZ -Name "URL Protocol" -Value " "
+set-ItemProperty -Path "HKLM:SOFTWARE\Classes\ms-gamebar\shell\open\command\" -Type REG_SZ -Name "(default)" -Value "$env:SystemRoot\System32\systray.exe"
+set-ItemProperty -Path "HKLM:SOFTWARE\Classes\ms-ms-gamebarservices\" -Type REG_SZ -Name "NoOpenWith" -Value " "
+set-ItemProperty -Path "HKLM:SOFTWARE\Classes\ms-ms-gamebarservices\" -Type REG_SZ -Name "URL Protocol" -Value " "
+set-ItemProperty -Path "HKLM:SOFTWARE\Classes\ms-ms-gamebarservices\shell\open\command\" -Type REG_SZ -Name "(default)" -Value "$env:SystemRoot\System32\systray.exe"
 
 
 write-host "Disable Suggested Notifications -> Needs Verification"
