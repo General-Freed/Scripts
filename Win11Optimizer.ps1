@@ -21,6 +21,7 @@ set-ItemProperty -Path "HKLM:SOFTWARE\Classes\ms-ms-gamebarservices\" -Type REG_
 set-ItemProperty -Path "HKLM:SOFTWARE\Classes\ms-ms-gamebarservices\" -Type REG_SZ -Name "URL Protocol" -Value " "
 set-ItemProperty -Path "HKLM:SOFTWARE\Classes\ms-ms-gamebarservices\shell\open\command\" -Type REG_SZ -Name "(default)" -Value "$env:SystemRoot\System32\systray.exe"
 
+#set-ItemProperty -Path "HKLM\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\" -Type REG_DWORD -Name "Enabled" -Value 0
 
 write-host "Disable Suggested Notifications -> Needs Verification"
 #set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.ActionCenter.SmartOptOut\" -Type DWORD -Name "Enabled" -Value 0
