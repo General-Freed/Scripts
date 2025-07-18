@@ -21,6 +21,9 @@ set-ItemProperty -Path "HKLM:SOFTWARE\Classes\ms-ms-gamebarservices\" -Type REG_
 set-ItemProperty -Path "HKLM:SOFTWARE\Classes\ms-ms-gamebarservices\" -Type REG_SZ -Name "URL Protocol" -Value " "
 set-ItemProperty -Path "HKLM:SOFTWARE\Classes\ms-ms-gamebarservices\shell\open\command\" -Type REG_SZ -Name "(default)" -Value "$env:SystemRoot\System32\systray.exe"
 
+Write-Host "VM platform Disable"
+Disable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-Hypervisor
+
 #set-ItemProperty -Path "HKLM\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\" -Type REG_DWORD -Name "Enabled" -Value 0
 
 write-host "Disable Suggested Notifications -> Needs Verification"
