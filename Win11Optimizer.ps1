@@ -44,20 +44,105 @@ foreach($d in $devices) {
 }
 
 write-host "Reg Keys"
-set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\" -Type DWORD -Name "SystemResponsiveness" -Value 0 # --> Default: 20
-set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\" -Type DWORD -Name "NetworkThrottlingIndex" -Value 0xffffffff # --> Default: 10
-set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" -Type DWORD -Name "Priority" -Value 6 # --> Default: 2
-set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" -Type DWORD -Name "GPU Priority" -Value 8 # --> Default: 2
-set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" -Type String -Name "Scheduling Category" -Value "High" # -->Default: Medium
-set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" -Type String -Name "SFIO Priority" -Value "High" # --> Default: Normal
-set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\PriorityControl" -Type DWORD -Name "Win32PrioritySeparation" -Value 22 #20/24/42 --> Default: 2
-set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios" -Type DWORD -Name "HypervisorEnforcedCodeIntegrity" -Value 0  #CoreIsolation # --> Default: N/A
-set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\DriverSearching" -Type DWORD -Name "SearchOrderConfig" -Value 0  #DriverSearch -> Default: 1
+$regkeylist = @()
+<#Xset-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\" -Type DWORD -Name "SystemResponsiveness" -Value 0 # --> Default: 20
+Xset-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\" -Type DWORD -Name "NetworkThrottlingIndex" -Value 0xffffffff # --> Default: 10
+Xset-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" -Type DWORD -Name "Priority" -Value 6 # --> Default: 2
+Xset-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" -Type DWORD -Name "GPU Priority" -Value 8 # --> Default: 2
+Xset-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" -Type String -Name "Scheduling Category" -Value "High" # -->Default: Medium
+Xset-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" -Type String -Name "SFIO Priority" -Value "High" # --> Default: Normal
+Xset-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\PriorityControl" -Type DWORD -Name "Win32PrioritySeparation" -Value 22 #20/24/42 --> Default: 2
+Xset-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios" -Type DWORD -Name "HypervisorEnforcedCodeIntegrity" -Value 0  #CoreIsolation # --> Default: N/A
+Xset-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\DriverSearching" -Type DWORD -Name "SearchOrderConfig" -Value 0  #DriverSearch -> Default: 1
 set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters" -Type DWORD -Name "EnablePrefetcher" -Value 0  #WinPrefetch # --> Default: 3
 # ?!? P0 State GPU
 set-itemProperty -path "HKLM:\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" -Type DWORD -Name "DisableDynamicPstate" -Value 1
 
-set-itemproperty -path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR" -Type DWORD -Name "AppCaptureEnabled" -Value 0
+set-itemproperty -path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR" -Type DWORD -Name "AppCaptureEnabled" -Value 0#>
+$ob = @{
+    Info = "System Responsiveness / Default 20 -> 0"
+    Path = "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\"
+    Type = "DWord"
+    Name = "SystemResponsiveness"
+    Value = 0
+}
+$regkeylist += $ob
+
+$ob = @{
+    Info = "Network Throttling Index / Default 10 -> 255"
+    Path = "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\"
+    Type = "DWord"
+    Name = "NetworkThrottlingIndex"
+    Value = 0xffffffff
+}
+$regkeylist += $ob
+
+$ob = @{
+    Info = "Gaming Priority / Default 2 -> 6"
+    Path = "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games"
+    Type = "DWord"
+    Name = "Priority"
+    Value = 6
+}
+$regkeylist += $ob
+
+$ob = @{
+    Info = "GPU Priority / Default 2 -> 8"
+    Path = "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games"
+    Type = "DWord"
+    Name = "GPU Priority"
+    Value = 8
+}
+$regkeylist += $ob
+
+$ob = @{
+    Info = "Scheduling Category / Default Medium -> High"
+    Path = "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games"
+    Type = "String"
+    Name = "Scheduling Category"
+    Value = "High"
+}
+$regkeylist += $ob
+
+$ob = @{
+    Info = "SFIO Priority / Default Normal -> High"
+    Path = "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games"
+    Type = "String"
+    Name = "SFIO Priority"
+    Value = "High"
+}
+$regkeylist += $ob
+
+$ob = @{
+    Info = "Core Isolation / Default 2 -> 22"
+    Path = "HKLM:\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios"
+    Type = "DWORD"
+    Name = "HypervisorEnforcedCodeIntegrity"
+    Value = 0
+}
+$regkeylist += $ob
+
+$ob = @{
+    Info = "Driver Searching / Default 1 -> 0"
+    Path = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\DriverSearching"
+    Type = "DWORD"
+    Name = "SearchOrderConfig"
+    Value = 0
+}
+$regkeylist += $ob
+
+
+foreach ($reg in $regkeylist) {
+    write-host $reg.Info
+    if(get-itemproperty -Path $reg.path -Name $reg.name -ErrorAction SilentlyContinue) {
+        set-itemproperty -path $reg.path -Type $reg.type -Name $reg.name -Value $reg.value
+    } else {
+        new-itemproperty -path $reg.path -Type $reg.type -Name $reg.name -Value $reg.value
+    }
+}
+
+
+
 
 Write-Host "Swap File Manual Size"
 $pagefile = Get-CimInstance -ClassName Win32_ComputerSystem
