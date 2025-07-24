@@ -11,7 +11,15 @@ foreach($s in $services) {
     Get-Service $s | Set-Service -StartupType Disabled
 }
 
-#write-host "Remove Apps"
+
+# ------------------------------------------------------------------------------------------
+write-host "Remove Apps"
+$applist = @("Microsoft.ZuneMusic","Microsoft.BingNews","Microsoft.BingSearch","Microsoft.BingWeather","Microsoft.MicrosoftSolitaireCollection","Microsoft.YourPhone")
+
+foreach($app in $Applist) {
+    Get-AppxPackage -AllUsers $app | Remove-AppxPackage
+}
+
 <#write-host "Remove GameBar and all the Glory that comes with it"
 Get-AppxPackage -AllUsers Microsoft.XboxGamingOverlay | Remove-AppxPackage
 set-ItemProperty -Path "HKLM:SOFTWARE\Classes\ms-gamebar\" -Type String -Name "NoOpenWith" -Value " "
