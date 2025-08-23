@@ -46,6 +46,9 @@ foreach($d in $devices) {
 }
 
 # ------------------------------------------------------------------------------------------
+
+# HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games
+
 write-host "Reg Keys"
 $regkeylist = @()
 <#Xset-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\" -Type DWORD -Name "SystemResponsiveness" -Value 0 # --> Default: 20
