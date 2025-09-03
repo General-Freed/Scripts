@@ -40,11 +40,7 @@ foreach($d in $devices) {
     Get-PnpDevice $d | ft InstanceID,Friendlyname -HideTableHeader
     Get-PnpDevice -InstanceId $d | Disable-PnpDevice -Confirm:$false
 }
-
 # ------------------------------------------------------------------------------------------
-
-# HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games
-
 write-host "Reg Keys"
 $regkeylist = @()
 
@@ -174,9 +170,6 @@ $ob = @{
 }
 $regkeylist += $ob
 
-
-
-<#
 $ob = @{
     Info = "Disable Suggested Notifications"
     Path = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.ActionCenter.SmartOptOut\"
@@ -193,11 +186,12 @@ $ob = @{
     Name = "Enabled"
     Value = 0
 }
-$regkeylist += $ob #>
+$regkeylist += $ob
 
 
 foreach ($reg in $regkeylist) {
     write-host $reg.Info
+    write-host get-itemproperty -Path $reg.path -Name $reg.name
     if(get-itemproperty -Path $reg.path -Name $reg.name -ErrorAction SilentlyContinue) {
         set-itemproperty -path $reg.path -Type $reg.type -Name $reg.name -Value $reg.value
     } else {
@@ -220,4 +214,5 @@ Set-CimInstance -InputObject $pagefileset
 # ------------------------------------------------------------------------------------------
 write-host "System Restore activate"
 Enable-ComputerRestore -Drive "C:\"
+
 
