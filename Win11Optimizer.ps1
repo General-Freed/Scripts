@@ -14,7 +14,7 @@ foreach($s in $services) {
 
 # ------------------------------------------------------------------------------------------
 write-host "Remove Apps"
-$applist = @("Microsoft.ZuneMusic","Microsoft.BingNews","Microsoft.BingSearch","Microsoft.BingWeather","Microsoft.MicrosoftSolitaireCollection","Microsoft.YourPhone")
+$applist = @("Microsoft.ZuneMusic","Microsoft.BingNews","Microsoft.BingSearch","Microsoft.BingWeather","Microsoft.MicrosoftSolitaireCollection","Microsoft.YourPhone","*Webexperience*")
 
 foreach($app in $Applist) {
     Get-AppxPackage -AllUsers $app | Remove-AppxPackage
