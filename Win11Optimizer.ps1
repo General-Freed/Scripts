@@ -188,6 +188,15 @@ $ob = @{
 }
 $regkeylist += $ob
 
+$ob = @{
+    Info = "Larger Taskbar"
+    Path = "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\"
+    Type = "DWORD"
+    Name = "TaskbarSi"
+    Value = 3
+}
+$regkeylist += $ob
+
 
 foreach ($reg in $regkeylist) {
     write-host $reg.Info
@@ -214,5 +223,6 @@ Set-CimInstance -InputObject $pagefileset
 # ------------------------------------------------------------------------------------------
 write-host "System Restore activate"
 Enable-ComputerRestore -Drive "C:\"
+
 
 
