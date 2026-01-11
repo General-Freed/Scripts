@@ -224,5 +224,10 @@ Set-CimInstance -InputObject $pagefileset
 write-host "System Restore activate"
 Enable-ComputerRestore -Drive "C:\"
 
+# Disable Delivery Optimization
+New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization" -Force
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization" -Name "DODownloadMode" -Type DWord -Value 0
 
+Stop-Service -Name DoSvc -Force
+Set-Service -Name DoSvc -StartupType Disabled
 
