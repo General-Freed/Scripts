@@ -200,6 +200,12 @@ $ob = @{
     Value = 3
 }
 $regkeylist += $ob
+<#
+reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\DeviceGuard" /v EnableVirtualizationBasedSecurity /t REG_DWORD /d 0 /f
+
+reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity" /v Enabled /t REG_DWORD /d 0 /f 
+#>
+
 
 
 foreach ($reg in $regkeylist) {
